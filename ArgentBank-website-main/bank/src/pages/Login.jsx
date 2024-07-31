@@ -1,10 +1,10 @@
 import '../styles/main.css';
 import Form from '../components/Form';
 
-function SignIn(){
+function Login(){
     return(
-        <Form />
+            <Form />
     )
 }
 
-export default SignIn;
+export default Login;
