@@ -1,45 +1,74 @@
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { userProfile } from '../redux/actions/user.actions.jsx';
+import User from '../components/User.jsx';
+import Account from '../components/Account.jsx';
+import AccountCardData from '../data/AccountCardData.json';
 import '../styles/main.css';
 
-function User(){
-    return(
-        <main class="main bg-dark">
-        <div class="header">
-          <h1>Welcome back<br />Tony Jarvis!</h1>
-          <button class="edit-button">Edit Name</button>
+/* User profile page */
+function UserProfile () {
+    const token = useSelector((state) => state.auth.token);
+    const dispatch = useDispatch();
+
+    /* Fonction asynchrone qui récupère les données de l'utilisateur et les met à jour avec useEffect */
+    useEffect(() => {
+        if (token) {
+            const userData = async () => {
+                try {
+                    const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                        },
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        /* 
+                            Vérification que la réponse à la requête a bien été récupérée
+                            console.log(data) 
+                        */
+                        const userData = {
+                            createdAt: data.body.createdAt,
+                            updatedAt: data.body.updatedAt,
+                            id: data.body.id,
+                            email: data.body.email,
+                            firstname: data.body.firstName,
+                            lastname: data.body.lastName,
+                            username: data.body.userName
+                        }
+                        /* Renvoi des données de l'utilisateur dans l'état redux */
+                        dispatch(userProfile(userData));
+                    } else {
+                        console.log("error while retrieving profile");
+                    }
+                } catch (error) {
+                    console.error(error);
+                };
+            };
+            userData();
+        }
+    }, [dispatch, token]);
+
+    return (
+        <div className='profile-page'>
+            <main className='bg-dark'>
+               {/* Retour du composant utilisateur */} 
+                < User />
+                {/* Retourner les éléments du fichier json avec la carte */}
+                {AccountCardData.map((data) => (
+                /* Retourner le composant du compte */
+                    <Account 
+                        key={data.id}
+                        title={data.title}
+                        amount={data.amount}
+                        description={data.description}
+                    />
+                ))}
+            </main>
         </div>
-        <h2 class="sr-only">Accounts</h2>
-        <section class="account">
-          <div class="account-content-wrapper">
-            <h3 class="account-title">Argent Bank Checking (x8349)</h3>
-            <p class="account-amount">$2,082.79</p>
-            <p class="account-amount-description">Available Balance</p>
-          </div>
-          <div class="account-content-wrapper cta">
-            <button class="transaction-button">View transactions</button>
-          </div>
-        </section>
-        <section class="account">
-          <div class="account-content-wrapper">
-            <h3 class="account-title">Argent Bank Savings (x6712)</h3>
-            <p class="account-amount">$10,928.42</p>
-            <p class="account-amount-description">Available Balance</p>
-          </div>
-          <div class="account-content-wrapper cta">
-            <button class="transaction-button">View transactions</button>
-          </div>
-        </section>
-        <section class="account">
-          <div class="account-content-wrapper">
-            <h3 class="account-title">Argent Bank Credit Card (x8349)</h3>
-            <p class="account-amount">$184.30</p>
-            <p class="account-amount-description">Current Balance</p>
-          </div>
-          <div class="account-content-wrapper cta">
-            <button class="transaction-button">View transactions</button>
-          </div>
-        </section>
-      </main>
     )
 }
 
-export default User;
+export default UserProfile

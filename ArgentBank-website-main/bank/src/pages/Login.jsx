@@ -1,9 +1,17 @@
+import React from 'react';
+import Form from '../components/Form.jsx';
 import '../styles/main.css';
-import Form from '../components/Form';
 
-function Login(){
-    return(
-            <Form />
+/* Page de connexion */
+function Login () {
+    return (
+        <div className='signin-page'>
+            <main className='bg-dark'>
+               {/* Retourne le composant du formulaire */} 
+                < Form />
+            </main>
+        </div>
+        
     )
 }
 
