@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUsername } from '../redux/actions/user.actions.jsx';
 import { isValidName } from "../utils/regex.jsx";
-import '../styles/main.css';
+import '../styles/User.css';
 
 function User () {
     /* Mise à jour des données de l'utilisateur sur la page de profil à partir de state redux */
@@ -66,7 +66,7 @@ function User () {
                 :
                 <div>
                     <h2>Edit user info</h2>
-                    <form>
+                    <form onSubmit={handleSubmitUsername} >
                         <div className="edit-input">
                             <label htmlFor="username">User name:</label>
                             <input
