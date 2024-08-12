@@ -66,7 +66,7 @@ function User () {
                 :
                 <div>
                     <h2>Edit user info</h2>
-                    <form onSubmit={handleSubmitUsername} >
+                    <form>
                         <div className="edit-input">
                             <label htmlFor="username">User name:</label>
                             <input
@@ -82,7 +82,7 @@ function User () {
                                 type="text"
                                 id="firstname" 
                                 defaultValue={userData.firstname}
-                                disabled={true}
+                                required
                             />
                         </div>
                         <div className="edit-input">
@@ -91,7 +91,7 @@ function User () {
                                 type="text"
                                 id="lastname" 
                                 defaultValue={userData.lastname}
-                                disabled={true}
+                                required
                             />
                         </div>
                         <div className="buttons">

@@ -23,3 +23,5 @@ module.exports.validateToken = (req, res, next) => {
 
   return res.status(response.status).send(response)
 }
+
+
