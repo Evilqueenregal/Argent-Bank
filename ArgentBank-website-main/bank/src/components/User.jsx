@@ -82,7 +82,7 @@ function User () {
                                 type="text"
                                 id="firstname" 
                                 defaultValue={userData.firstname}
-                                required
+                                disabled={true}
                             />
                         </div>
                         <div className="edit-input">
@@ -91,7 +91,7 @@ function User () {
                                 type="text"
                                 id="lastname" 
                                 defaultValue={userData.lastname}
-                                required
+                                disabled={true}
                             />
                         </div>
                         <div className="buttons">
