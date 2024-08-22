@@ -25,6 +25,7 @@ function UserProfile () {
                     });
                     if (response.ok) {
                         const data = await response.json();
+                        console.log("Response Data:", data);
                         /* 
                             Vérification que la réponse à la requête a bien été récupérée
                             console.log(data) 

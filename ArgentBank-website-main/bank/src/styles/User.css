@@ -29,9 +29,9 @@
     padding-left: 3px;
     width: 110px;
   }
-  .edit-inputinput *:disabled {
-    background-color: #c9c9c9;
-    color: #505050;
+  .edit-input *:disabled {
+    background-color: white;
+    color: #000;
   }
   
   .buttons {

@@ -3,7 +3,8 @@ import { GET_USERPROFILE, EDIT_USERNAME, LOGOUT } from "../actions/type.actions"
 /* État initial de l'utilisateur */
 const initialState = {
     status: 'VOID',
-    userData: {}
+    userData: {
+    }
 }
 
 export const userReducer = (state = initialState, action ) => {
@@ -13,6 +14,7 @@ export const userReducer = (state = initialState, action ) => {
                 ...state,
                 status: 'SUCCEEDED',
                 userData: action.payload
+
             }
         case EDIT_USERNAME: 
             return {
