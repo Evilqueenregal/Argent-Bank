@@ -8,7 +8,9 @@ function User () {
     /* Mise à jour des données de l'utilisateur sur la page de profil à partir de state redux */
     const token = useSelector((state) => state.auth.token);
     const userData = useSelector((state) => state.user.userData);
-    console.log("User Data in Redux:",userData);
+    console.log("User Data in Redux:", JSON.stringify(userData, null, 2));
+
+    
     /* Gère l'apparence du formulaire de modification du nom d'utilisateur */
     const [display, setDisplay] = useState(true);
     /* Obtenir le nom d'utilisateur */
@@ -82,8 +84,8 @@ function User () {
                             <input
                                 type="text"
                                 id="firstname" 
-                                defaultValue={userData.firstname}
-                                disabled={true}
+                                value={userData.firstname}
+                                readOnly
                             />
                         </div>
                         <div className="edit-input">
@@ -91,8 +93,8 @@ function User () {
                             <input
                                 type="text"
                                 id="lastname" 
-                                defaultValue={userData.lastname}
-                                disabled={true}
+                                value={userData.lastname}
+                                readOnly
                             />
                         </div>
                         <div className="buttons">
@@ -108,3 +110,6 @@ function User () {
 }
 
 export default User
+
+
+
